@@ -1,25 +1,25 @@
 package com.example;
 
 //P143Q1
-public class InStack {
-    int[] stack;
+public class InStackGeneric<E> {
+    E[] stack;
     int ptr;
     int capacity = 0;
 
-    public InStack(int stackLength) {
+    public InStackGeneric(int stackLength) {
         capacity = stackLength;
         ptr = 0;
-        stack = new int[capacity];
+        stack = (E[]) new Object[capacity];
     }
 
-    public int push(int x) throws OverflowStackException {
+    public E push(E x) throws OverflowStackException {
         if (ptr >= capacity) {
             throw new OverflowStackException();
         }
         return stack[ptr++] = x;
     }
 
-    public int pop() throws EmptyStackException {
+    public E pop() throws EmptyStackException {
         if (ptr <= 0) {
             throw new EmptyStackException();
         }
@@ -27,7 +27,7 @@ public class InStack {
         return stack[--ptr];
     }
 
-    public int peek() throws EmptyStackException {
+    public E peek() throws EmptyStackException {
         if (ptr <= 0) {
             throw new EmptyStackException();
         }
@@ -39,7 +39,7 @@ public class InStack {
         ptr = 0;
     }
 
-    public int indexOf(int x) {
+    public int indexOf(E x) {
         for (int i = ptr - 1; i >= 0; i--) {
             if (stack[i] == x) {
                 return i;
